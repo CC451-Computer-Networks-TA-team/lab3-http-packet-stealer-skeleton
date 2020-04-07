@@ -24,26 +24,31 @@ class TcpPacket(object):
         self.payload = payload
 
 
-def parse_application_layer_packet(self, ip_packet_payload: bytes) -> TcpPacket:
+def parse_raw_ip_addr(raw_ip_addr: bytes) -> str:
+    # Converts a byte-array IP address to a string
+    # the input is on the form b'\xaa\xab'... a byte array
+    return "0.0.0.0"
+
+
+def parse_application_layer_packet(ip_packet_payload: bytes) -> TcpPacket:
     # Parses raw bytes of a TCP packet
+    # That's a byte literal (~byte array) check resources section
+    return TcpPacket(-1, -1, -1, b'')
 
-    # return TcpPacket(...)
-    return None
 
-
-def parse_network_layer_packet(self, ip_packet: bytes):
-    # Parses raw bytes of an IPv4 packet, returns none otherwise
-
-    # return IpPacket(...)
-    return None
+def parse_network_layer_packet(ip_packet: bytes) -> IpPacket:
+    # Parses raw bytes of an IPv4 packet
+    # That's a byte literal (~byte array) check resources section
+    return IpPacket(-1, -1, "0.0.0.0", "0.0.0.0", b'')
 
 
 def main():
-    # Un-comment this line if you're getting too much traffic to bind to
-    # an interface on your PC. [this is not required, it just to make things less noisy]
-    # iface_name_bytes = bytes("lo", "ASCII")
+    # Un-comment this line if you're getting too much noisy traffic.
+    # to bind to an interface on your PC. (or you can simply disconnect from the internet)
+
+    # iface_name = "lo"
     # stealer.setsockopt(socket.SOL_SOCKET,
-    #                    socket.SO_BINDTODEVICE, iface_name_bytes)
+    #                    socket.SO_BINDTODEVICE, bytes(iface_name, "ASCII"))
     while True:
         # Receive packets and do processing here
         pass
